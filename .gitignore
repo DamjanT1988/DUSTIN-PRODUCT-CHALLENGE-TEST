@@ -8,3 +8,6 @@ obj/
 node_modules/
 dist/
 .env
+
+# Visual Studio
+.vs/
