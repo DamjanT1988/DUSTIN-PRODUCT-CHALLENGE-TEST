@@ -16,7 +16,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { Product } from "./api/types";
+import type { Product } from "./api/types";
 import api from "./api/client";
 
 type Mode = "add" | "edit";
