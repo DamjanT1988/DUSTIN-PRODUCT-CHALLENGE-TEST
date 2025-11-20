@@ -2,11 +2,18 @@
 
 FROM node:20-alpine
 
+# 1. Work in /app
 WORKDIR /app
 
-COPY package*.json ./
+# 2. Copy ONLY package.json + lock file from the build context root (frontend/)
+#    Avoid glob patterns on Windows; be explicit.
+COPY package.json ./
+COPY package-lock.json ./  
+
+# 3. Install dependencies
 RUN npm install
 
+# 4. Copy the rest of the frontend source
 COPY . .
 
 EXPOSE 5173

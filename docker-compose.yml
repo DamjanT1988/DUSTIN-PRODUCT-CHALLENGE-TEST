@@ -1,8 +1,8 @@
 services:
   api:
     build:
-      context: .
-      dockerfile: ./backend/ProductApi/Dockerfile
+      context: ./backend/ProductApi
+      dockerfile: Dockerfile
     container_name: product-api
     ports:
       - "5091:8080"
@@ -11,8 +11,8 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
+      context: ./frontend       # <- must be the folder where package.json lives
+      dockerfile: Dockerfile
     container_name: product-frontend
     ports:
       - "5173:5173"
