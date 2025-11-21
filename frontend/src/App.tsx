@@ -197,6 +197,9 @@ function App() {
                 <Search fontSize="small" />
               </InputAdornment>
             ),
+            inputProps: {
+              "data-testid": "search-input",
+            },
           }}
           sx={{ flexGrow: 1, mr: 2 }}
         />
@@ -204,6 +207,7 @@ function App() {
           variant="text"
           onClick={openAddDialog}
           sx={{ textTransform: "none", fontWeight: 500 }}
+          data-testid="add-product-btn"
         >
           Add Product
         </Button>
@@ -266,6 +270,7 @@ function App() {
                     size="small"
                     aria-label="edit"
                     onClick={() => openEditDialog(p)}
+                    data-testid="edit-product-btn"
                   >
                     <Edit fontSize="small" />
                   </IconButton>
@@ -273,6 +278,7 @@ function App() {
                     size="small"
                     aria-label="delete"
                     onClick={() => setDeleteTarget(p)}
+                    data-testid="delete-product-btn"
                   >
                     <Delete fontSize="small" />
                   </IconButton>
@@ -289,7 +295,12 @@ function App() {
       </Paper>
 
       {/* Add/Edit Dialog */}
-      <Dialog open={dialogOpen} onClose={handleDialogClose} fullWidth maxWidth="sm">
+      <Dialog
+        open={dialogOpen}
+        onClose={handleDialogClose}
+        fullWidth
+        maxWidth="sm"
+      >
         <DialogTitle>
           {dialogMode === "add" ? "Add Product" : "Edit Product"}
         </DialogTitle>
@@ -303,18 +314,21 @@ function App() {
             disabled={dialogMode === "edit"}
             onChange={(e) => handleInputChange("id", e.target.value)}
             size="small"
+            inputProps={{ "data-testid": "product-id-input" }}
           />
           <TextField
             label="Product name"
             value={currentProduct.name}
             onChange={(e) => handleInputChange("name", e.target.value)}
             size="small"
+            inputProps={{ "data-testid": "product-name-input" }}
           />
           <TextField
             label="Brand"
             value={currentProduct.brand}
             onChange={(e) => handleInputChange("brand", e.target.value)}
             size="small"
+            inputProps={{ "data-testid": "product-brand-input" }}
           />
           <TextField
             label="Price (EUR)"
@@ -322,6 +336,7 @@ function App() {
             value={currentProduct.price || ""}
             onChange={(e) => handleInputChange("price", e.target.value)}
             size="small"
+            inputProps={{ "data-testid": "product-price-input" }}
           />
           <TextField
             label="Description"
@@ -330,6 +345,7 @@ function App() {
             size="small"
             multiline
             minRows={2}
+            inputProps={{ "data-testid": "product-description-input" }}
           />
           <TextField
             label="Stock"
@@ -337,11 +353,16 @@ function App() {
             value={currentProduct.stock || ""}
             onChange={(e) => handleInputChange("stock", e.target.value)}
             size="small"
+            inputProps={{ "data-testid": "product-stock-input" }}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleSave}>
+          <Button
+            variant="contained"
+            onClick={handleSave}
+            data-testid="save-product-btn"
+          >
             Save
           </Button>
         </DialogActions>
@@ -361,7 +382,12 @@ function App() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDeleteTarget(null)}>Cancel</Button>
-          <Button color="error" variant="contained" onClick={confirmDelete}>
+          <Button
+            color="error"
+            variant="contained"
+            onClick={confirmDelete}
+            data-testid="confirm-delete-btn"
+          >
             Delete
           </Button>
         </DialogActions>
